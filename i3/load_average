@@ -1,0 +1,6 @@
+#!/bin/sh
+
+load="$(iostat -c | grep "[,]" | cut -c 11-18)"
+
+# full text
+watch -n 1 echo "$load"
