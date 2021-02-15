@@ -3,18 +3,20 @@
 *I try to update this along with my config, but it might take some time for me to describe new changes.*
 
 Since I currently use an `i3` system with `zsh` as my shell and `nvim` as my editor, these are the most important configs here.
-I have also modified some of the `nvim` plugins to better suit my workflow, more on this below.
-
-#### Contents:
-1. [`nvim`](#nvim-config)
-1. [`i3`](#i3-config)
-1. [`zsh`](#zsh-config)
 
 ## `nvim` config
 
-A huge `nvim` config [over here](nvim/init.vim) along with [coc.vim settings]().
+A huge `nvim` config [over here](nvim/init.vim) along with [coc.vim settings](nvim/coc-settings.json).
 
 Install `nvim` and drop these into `~/.config/nvim/`
+
+Install [`vim-plug`](https://github.com/junegunn/vim-plug) or another plugin 
+manager (that'd require modifying the plugin sections with that manager calls).
+
+Use this command whenever you update plugins in your config:
+```
+nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins
+```
 
 ## `i3` config
 

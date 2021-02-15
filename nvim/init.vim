@@ -80,6 +80,7 @@ call plug#end()
 "==============================================================================
 
 
+" Language server settings
 if executable('ccls')
    au User lsp_setup call lsp#register_server({
       \ 'name': 'ccls',
