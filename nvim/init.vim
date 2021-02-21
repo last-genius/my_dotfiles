@@ -414,6 +414,9 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Use <leader>l to launch (run) the program
+nnoremap <leader>l :CocCommand rust-analyzer.run<cr>
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 

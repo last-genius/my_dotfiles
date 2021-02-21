@@ -18,6 +18,8 @@ Use this command whenever you update plugins in your config:
 nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins
 ```
 
+Install rust language server with [these instructions](https://rust-analyzer.github.io/manual.html#vimneovim)
+
 ## `i3` config
 
 My [i3 config](i3/config) and [i3blocks setup](i3/i3blocks.conf) with a bunch 
