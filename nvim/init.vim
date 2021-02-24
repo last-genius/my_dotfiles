@@ -34,6 +34,8 @@ Plug 'machakann/vim-highlightedyank'
 " Adds support for language-specific word navigation, but I don't think it
 " supports Rust (yet anyway)
 Plug 'andymass/vim-matchup'
+" Adds a view into the tree of the current directory
+Plug 'scrooloose/nerdTree'
 
 " Fuzzy finder
 " Just changes the working directory to the project's working directory
@@ -72,6 +74,10 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 " Allows me to preview Markdown files, more on this below
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" CSS/HTML helper
+Plug 'mattn/emmet-vim'
+" Easily add matching brackets
+Plug 'tpope/vim-surround'
 
 " Just a color theme I like, feel free to choose your own
 Plug 'arzg/vim-colors-xcode'
@@ -144,6 +150,9 @@ let g:lightline = {
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
+
+" Tree view toggle shortcut
+nmap <C-t> :NERDTreeToggle<CR>
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -494,7 +503,7 @@ autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
 " Setting up the shortcuts for Markdown Preview
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+"nmap <C-p> <Plug>MarkdownPreviewToggle
 
 " =============================================================================
 " # C/C++
