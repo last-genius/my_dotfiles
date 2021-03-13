@@ -1,3 +1,4 @@
+echom '>^.^<'
 " Fair warning: I stole most of this .vimrc from many different places and I
 " only have a remote understanding of what some parts of it do, however, it
 " should give you a nice-looking and working (N)vim setup from the get-go.
@@ -81,6 +82,15 @@ Plug 'tpope/vim-surround'
 
 " Just a color theme I like, feel free to choose your own
 Plug 'arzg/vim-colors-xcode'
+Plug 'kevinhwang91/rnvimr'
+
+" Firefox plugin config files code highlighting
+Plug 'tridactyl/vim-tridactyl'
+
+" Allows for easier work with git
+" You can jump between hunks with [c and ]c. 
+" You can preview, stage, and undo hunks with <leader>hp, <leader>hs, and <leader>hu respectively.
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 "==============================================================================
@@ -95,7 +105,7 @@ if executable('ccls')
       \   lsp#utils#find_nearest_parent_file_directory(
       \     lsp#utils#get_buffer_path(), ['.ccls', 'compile_commands.json', '.git/']))},
       \ 'initialization_options': {
-      \   'highlight': { 'lsRanges' : v:true },
+      \   'highlight': { "enabled": true, 'lsRanges' : v:true },
       \   'cache': {'directory': stdpath('cache') . '/ccls' },
       \ },
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
@@ -157,17 +167,88 @@ nmap <C-t> :NERDTreeToggle<CR>
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
+" Vim config hotkeys
+:nnoremap <leader>cv :vsplit ~/.config/nvim/init.vim<cr>
+:nnoremap <leader>cs :source ~/.config/nvim/init.vim<cr>
+
 " Open hotkeys
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
 
-" Quick-save
+" ranger plugin settings
+" make ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+
+" make ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" disable a border for floating window
+let g:rnvimr_draw_border = 0
+
+" hide the files included in gitignore
+let g:rnvimr_hide_gitignore = 1
+
+" change the border's color
+let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
+
+" make neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+
+" add a shadow window, value is equal to 100 will disable shadow
+let g:rnvimr_shadow_winblend = 70
+
+" draw border with both
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+
+" link cursorline into RnvimrNormal highlight in the Floating window
+highlight link rnvimrNormal CursorLine
+
+nnoremap <silent> <M-o> :RnvimrToggle<CR>
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+
+" resize floating window by all preset layouts
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+
+" resize floating window by special preset layouts
+tnoremap <silent> <M-l> <C-\><C-n>:RnvimrResize 1,8,9,11,5<CR>
+
+" resize floating window by single preset layout
+tnoremap <silent> <M-y> <C-\><C-n>:RnvimrResize 6<CR>
+
+" map rnvimr action
+let g:rnvimr_action = {
+            \ '<c-t>': 'NvimEdit tabedit',
+            \ '<c-x>': 'NvimEdit split',
+            \ '<c-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
+
+" add views for ranger to adapt the size of floating window
+let g:rnvimr_ranger_views = [
+            \ {'minwidth': 80, 'maxwidth': 89, 'ratio': [1,1]},
+            \ ]
+
+" customize the initial layout
+let g:rnvimr_layout = {
+            \ 'relative': 'editor',
+            \ 'width': float2nr(round(0.7 * &columns)),
+            \ 'height': float2nr(round(0.7 * &lines)),
+            \ 'col': float2nr(round(0.15 * &columns)),
+            \ 'row': float2nr(round(0.15 * &lines)),
+            \ 'style': 'minimal'
+            \ }
+
+" vim-gitgutter toggle
+nnoremap <leader>gt :GitGutterToggle<CR>
+
+" quick-save
 nmap <leader>w :w<CR>
 
-" Exit
+" exit
 map <leader>q :wq<CR>
 
-" Don't confirm .lvimrc
+" don't confirm .lvimrc
 let g:localvimrc_ask = 0
 
 " Rust
@@ -367,6 +448,7 @@ inoremap <right> <nop>
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
+nnoremap <leader>d :bd<CR>
 
 " Move by line
 nnoremap j gj
@@ -578,3 +660,4 @@ endif
 if has('nvim')
 	runtime! plugin/python_setup.vim
 endif
+
