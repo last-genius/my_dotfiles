@@ -181,16 +181,18 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 # I am using i3blocks here, with its own scripts in this directory
 bar {
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	colors{
-        	background #0C0C0C
-	        statusline #DCDCDC
-		separator #000000
-		focused_workspace #0C0C0C #0C0C0C #0a84ff
-		active_workspace #0C0C0C #0C0C0C #014589
-		inactive_workspace #0C0C0C #0C0C0C #B1B1B1
-		urgent_workspace #0C0C0C #dd0000 #FFFFFF
-        }
+    font pango:DejaVu Sans Mono, FontAwesome 12
+    position bottom
+    status_command /usr/bin/i3status-rs /home/lastgenius/.config/i3status-rust/config.toml
+    colors {
+	background #0C0C0C
+	statusline #DCDCDC
+	separator #000000
+	focused_workspace #0C0C0C #0C0C0C #0a84ff
+	active_workspace #0C0C0C #0C0C0C #014589
+	inactive_workspace #0C0C0C #0C0C0C #B1B1B1
+	urgent_workspace #0C0C0C #dd0000 #FFFFFF
+    }
 }
 
 # Move workspace to next screen

@@ -22,11 +22,12 @@ Install rust language server with [these instructions](https://rust-analyzer.git
 
 ## `i3` config
 
-My [i3 config](i3/config) and [i3blocks setup](i3/i3blocks.conf) with a bunch 
-of separate scripts. Some of the basic hotkeys, startup applications, nice
+My [i3 config](i3/config) and [i3status-rs setup](i3/config.toml).
+Some of the basic hotkeys, startup applications, nice
 status bar.
 
-Just install `i3-gaps` and `i3blocks` and drop the `i3` folder into `~/.config/i3/`.
+Just install `i3-gaps` and `i3status-rust` and drop the `i3` config into `~/.config/i3/`,
+`i3status` config into `~/.config/i3status-rust/`.
 
 ## `zsh` config
 

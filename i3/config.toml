@@ -1,0 +1,47 @@
+[theme]
+name = "space-villain"
+[theme.overrides]
+idle_bg = "#0c0c0c"
+
+[icons]
+name = "awesome5"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"
+
+[[block]]
+block = "backlight"
+step_width = 3
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "pacman"
+interval = 600
+format = "{both}"
+format_singular = "{both}"
+format_up_to_date = "up to date"
+aur_command = "yay -Quq"
+
+[[block]]
+block = "music"
+buttons = ["prev", "play", "next"]
+max_width = 20
+dynamic_width = false
