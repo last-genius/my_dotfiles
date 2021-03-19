@@ -343,7 +343,24 @@ cnoremap %s/ %sm/
 set guioptions-=T " Remove toolbar
 set vb t_vb= " No more beeps
 set backspace=2 " Backspace over newlines
+" Folding stuff
+" Press za to fold/unfold
+" zm to increase fold level by one
+" zr to decrease fold level by one
 set nofoldenable
+set foldmethod=syntax
+set foldlevel=2
+set foldnestmax=10
+
+" autocmd to save view automatically when exiting and to load it when I get
+" back to work. Allows you to save folds after you close the buffer for
+" example
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
 set ttyfast
 " https://github.com/vim/vim/issues/1735#issuecomment-383353563
 set lazyredraw

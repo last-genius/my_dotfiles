@@ -74,6 +74,7 @@ alias wificonnect="nmcli device wifi connect"
 alias wifilist="nmcli device wifi list"
 alias time="timedatectl set-ntp true"
 alias cat="bat"
+alias tree="broot"
 alias gt="git"
 alias gti="git"
 alias g="git"
@@ -97,9 +98,24 @@ alias l="exa --long --header --git"
 alias vact="source venv/bin/activate"
 alias update="sudo pacman -Syu"
 alias vimupdate="nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins"
-alias pycharm="sh /opt/pycharm-*/bin/pycharm.sh"
-alias clion="sh /opt/clion-*/bin/clion.sh"
+
+# CMake stuff
+alias cbb="cmake --build build"
+alias cmm="cmake -DCMAKE_BUILD_TYPE=Release -S . -B build"
+
+# Docker stuff
+alias prune="docker system prune --volumes"
+alias dbuild="docker build ."
+alias drun="docker run --rm"
+alias dc="docker-compose"
+alias rust-musl-builder="docker run --rm -it -v "$(pwd)":/home/rust/src ekidd/rust-musl-builder \
+						-v cargo-git:/home/rust/.cargo/git \
+						-v cargo-registry:/home/rust/.cargo/registry \
+						-v target:/home/rust/src/target"
+
+
 alias py="python"
+alias top="ytop -c monokai"
 mkcd() {
 	mkdir $1 && cd $1
 }
@@ -119,3 +135,8 @@ export LC_ALL=en_US.UTF-8
 
 # Probably has something to do with the broot. Have no idea why it's here.
 source /home/lastgenius/.config/broot/launcher/bash/br
+
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
