@@ -14,12 +14,10 @@ font pango:System San Francisco Display 12
 exec --no-startup-id nm-applet
 exec --no-startup-id NetworkManager
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
 # change volume or toggle mute
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -80,9 +78,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 # These are just the ones I prefer. Feel free to change them.
@@ -104,10 +99,6 @@ set $ws15 "15"
 
 # This makes these apps launch in specified workspaces by default
 assign [class="TelegramDesktop"] $ws2
-assign [class="jetbrains-pycharm"] $ws3
-assign [class="jetbrains-clion"] $ws3
-assign [class="jetbrains-idea"] $ws3
-assign [class="ranger"] $ws4
 assign [class="calibre"] $ws9
 
 # switch to workspace
@@ -148,7 +139,8 @@ bindsym $mod+Shift+End move container to workspace number $ws15
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -181,7 +173,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 # I am using i3blocks here, with its own scripts in this directory
 bar {
-    font pango:DejaVu Sans Mono, FontAwesome 12
+    font pango:DejaVu Sans Mono, FontAwesome 11
     position bottom
     status_command /usr/bin/i3status-rs /home/lastgenius/.config/i3status-rust/config.toml
     colors {
@@ -225,12 +217,12 @@ bindsym Print exec flameshot gui
 # Program launching bindings
 bindsym $mod+Return exec kitty
 bindsym $mod+shift+f exec kitty -e ranger
-bindsym $mod+shift+e exec teams
 bindsym $mod+shift+t exec telegram-desktop
 bindsym $mod+shift+a exec arandr
 
 # Hide top bar
 new_window pixel 0
+for_window [class=".*"] border pixel 0
 
 # Workspace tab switching
 bindsym $mod+Tab workspace back_and_forth

@@ -65,7 +65,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor :)
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Just aliases that greatly improve my workflow.
 # The Minecraft one is the most used. 
@@ -75,9 +75,14 @@ alias wifilist="nmcli device wifi list"
 alias time="timedatectl set-ntp true"
 alias cat="bat"
 alias tree="broot"
+alias g="git"
 alias gt="git"
 alias gti="git"
-alias g="git"
+alias gc="git clone"
+alias ga="git add"
+alias gs="git status"
+alias gcm="git commit"
+alias gp="git push"
 alias cmkae="cmake"
 alias yya="yay"
 alias valgrind_debug="valgrind --leak-check=full \
@@ -89,30 +94,25 @@ alias shutup="shutdown now"
 alias big="du -hsx -- * | sort -rh | head -10"
 alias zshconf="nvim ~/.zshrc"
 alias vimconf="nvim ~/.config/nvim/init.vim"
-alias gc="git clone"
-alias ga="git add"
-alias gs="git status"
-alias gcm="git commit"
-alias gp="git push"
 alias l="exa --long --header --git"
 alias vact="source venv/bin/activate"
 alias update="sudo pacman -Syu"
 alias vimupdate="nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins"
+alias vim="nvim"
+alias view="nvim -R"
 
 # CMake stuff
 alias cbb="cmake --build build"
 alias cmm="cmake -DCMAKE_BUILD_TYPE=Release -S . -B build"
 
 # Docker stuff
+alias yay="paru"
 alias prune="docker system prune --volumes"
+alias dcb="docker-compose build"
+alias dcu="docker-compose up"
 alias dbuild="docker build ."
 alias drun="docker run --rm"
 alias dc="docker-compose"
-alias rust-musl-builder="docker run --rm -it -v "$(pwd)":/home/rust/src ekidd/rust-musl-builder \
-						-v cargo-git:/home/rust/.cargo/git \
-						-v cargo-registry:/home/rust/.cargo/registry \
-						-v target:/home/rust/src/target"
-
 
 alias py="python"
 alias top="ytop -c monokai"
@@ -126,10 +126,6 @@ bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
-
-# Bindkeys
-alias dec="sudo xbacklight -dec $1"
-alias inc="sudo xbacklight -inc $1"
 
 export LC_ALL=en_US.UTF-8
 
