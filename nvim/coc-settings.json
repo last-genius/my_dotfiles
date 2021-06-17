@@ -1,17 +1,26 @@
 {
-  "rust-analyzer.cargo-watch.enable": false,
-  "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
-"languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                },
-                "highlight": { "lsRanges" : true }
-            }
-        }
-    }
+	"rust-analyzer.cargo-watch.enable": false,
+	"rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"args": ["--log-file=/tmp/ccls.log", "-v=1"],
+			"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+			"rootPatterns": [".ccls", "compile_commands.json"],
+			"initializationOptions": {
+				"cache": {
+				"directory": "/tmp/ccls"
+				},
+				"client": {
+					"snippetSupport": true
+				},
+				"index": {
+					"onChange": true
+				},
+				"highlight": {
+					"lsRanges" : true
+				}
+			}
+		}
+	}
 }

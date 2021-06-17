@@ -20,6 +20,7 @@ Plug 'preservim/nerdcommenter'
 " Clang C/C++ formatters
 Plug 'rhysd/vim-clang-format'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'vim-syntastic/syntastic'
 
 " Allows for more sane collaboration through code formatting guidelines
 Plug 'editorconfig/editorconfig-vim'
@@ -42,7 +43,7 @@ Plug 'scrooloose/nerdTree'
 " Just changes the working directory to the project's working directory
 Plug 'airblade/vim-rooter'
 " The fuzzy finder itself
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Semantic language support (it was way more ugly only a few months ago)
@@ -91,6 +92,12 @@ Plug 'tridactyl/vim-tridactyl'
 " You can jump between hunks with [c and ]c. 
 " You can preview, stage, and undo hunks with <leader>hp, <leader>hs, and <leader>hu respectively.
 Plug 'airblade/vim-gitgutter'
+
+" Math Latex formulas preview
+Plug 'jbyuki/nabla.nvim'
+
+" Distraction-free writing
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 "==============================================================================
@@ -163,6 +170,10 @@ endfunction
 
 " Tree view toggle shortcut
 nmap <C-t> :NERDTreeToggle<CR>
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -593,8 +604,11 @@ let g:latex_indent_enabled = 1
 let g:latex_fold_envs = 0
 let g:latex_fold_sections = []
 let g:UltiSnipsExpandTrigger="<C-d>"
+let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-s>"
+" Latex Math formulas preview
+nnoremap <F5> :lua require("nabla").replace_current()<CR>
 
 " Script plugins
 autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
@@ -612,6 +626,13 @@ nmap <M-s> <Plug>MarkdownPreviewStop
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
+
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Map Leader+f to format C/C++ files
 nnoremap <Leader>f :<C-u>ClangFormat<CR>
