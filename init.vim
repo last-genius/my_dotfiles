@@ -501,6 +501,7 @@ inoremap <right> <nop>
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
+nnoremap <leader>d :bd<CR>
 
 " Move by line
 nnoremap j gj
