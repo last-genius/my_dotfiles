@@ -63,6 +63,7 @@ Plug 'kevinhwang91/rnvimr'
 " You can jump between hunks with [c and ]c. 
 " You can preview, stage, and undo hunks with <leader>hp, <leader>hs, and <leader>hu respectively.
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " Math Latex formulas preview
 Plug 'jbyuki/nabla.nvim'
@@ -213,6 +214,12 @@ nnoremap <leader>gt :GitGutterToggle<CR>
 " Vim config hotkeys
 :nnoremap <leader>cv :vsplit ~/.config/nvim/init.vim<cr>
 :nnoremap <leader>cs :source ~/.config/nvim/init.vim<cr>
+
+" Remap split switch keys
+nnoremap <silent> <C-Right> <c-w>l
+nnoremap <silent> <C-Left> <c-w>h
+nnoremap <silent> <C-Up> <c-w>k
+nnoremap <silent> <C-Down> <c-w>j
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -488,7 +495,7 @@ command! -bang -nargs=? -complete=dir Files
   \                               'options': '--tiebreak=index'}, <bang>0)
 
 " Open new file adjacent to current file
-nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>t :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
