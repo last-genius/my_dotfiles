@@ -18,6 +18,15 @@ Use this command whenever you update plugins in your config:
 nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins
 ```
 
+For use with CMake, activate this [option](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html)
+to generate a `compile_commands.json` file, automatically picked up by the language server.
+```
+# add option in CMakeLists.txt
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# save file in the main project folder from the build directory
+ln -s ~/.../project/build/compile_commands.json ~/.../project/compile_commands.json
+```
+
 Install rust language server with [these instructions](https://rust-analyzer.github.io/manual.html#vimneovim)
 
 ## `i3` config
