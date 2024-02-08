@@ -12,6 +12,9 @@ filetype off
 set rtp+=~/.config/nvim/templates/vim/
 call plug#begin()
 
+Plug 'milisims/nvim-luaref'
+Plug 'folke/lua-dev.nvim'
+
 " Language server stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -371,7 +374,7 @@ set diffopt+=indent-heuristic
 set colorcolumn=80 " and give me a colored column
 set showcmd " Show (partial) command in status line.
 set mouse=a " Enable mouse usage (all modes) in terminals
-set shortmess+=c " don't give |ins-completion-menu| messages.
+set shortmess-=c " don't give |ins-completion-menu| messages.
 
 " Show those damn hidden characters
 " Verbose: set listchars=nbsp:¬,eol:¶,extends:»,precedes:«,trail:•

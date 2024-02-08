@@ -186,6 +186,18 @@ bar {
 	urgent_workspace #0C0C0C #dd0000 #FFFFFF
     }
 }
+#bar {
+	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	#colors{
+		#background #0C0C0C
+		#statusline #DCDCDC
+		#separator #000000
+		#focused_workspace #0C0C0C #0C0C0C #0a84ff
+		#active_workspace #0C0C0C #0C0C0C #014589
+		#inactive_workspace #0C0C0C #0C0C0C #B1B1B1
+		#urgent_workspace #0C0C0C #dd0000 #FFFFFF
+	#}
+#}
 
 # Move workspace to next screen
 bindsym $mod+x move workspace to output right
@@ -195,7 +207,7 @@ bindsym XF86MonBrightnessUp exec sudo /home/lastgenius/.config/i3/inc # increase
 bindsym XF86MonBrightnessDown exec sudo /home/lastgenius/.config/i3/dec # decrease screen brightness
 
 # Lock screen
-bindsym Control+$mod+v exec sudo /home/lastgenius/.config/i3/lock
+bindsym $mod+Control+l exec sudo /home/lastgenius/.config/i3/lock
 
 # Shutdown controls
 bindsym Control+$mod+s exec sudo /home/lastgenius/.config/i3/lock && sudo /home/lastgenius/.config/i3/suspend
@@ -205,11 +217,12 @@ bindsym Control+$mod+r exec sudo /home/lastgenius/.config/i3/reboot
 # Startup applications
 exec telegram-desktop
 exec firefox
-exec guake
-exec_always feh --bg-fill /home/lastgenius/Pictures/photo_2021-01-04_23-36-13.jpg 
-exec_always "setxkbmap -layout us,ua -option grp:alt_shift_toggle"
+exec kbdd
+exec_always feh --bg-fill /home/lastgenius/42/citizen_sleeper/CS_Lofi_169_4k.jpg
+exec_always "setxkbmap -layout us,ua,ru -option grp:alt_shift_toggle"
 exec_always i3-msg border none
-exec_always flameshot
+exec flameshot
+exec --no-startup-id dunst
 
 # Screenshot bindings
 bindsym Print exec flameshot gui
@@ -227,3 +240,5 @@ for_window [class=".*"] border pixel 0
 # Workspace tab switching
 bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth no
+
+exec setxkbmap -option compose:ralt

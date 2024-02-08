@@ -1,0 +1,105 @@
+set auto-load safe-path /
+
+set debuginfod enabled off
+
+set print array on
+set print pretty on
+
+set width 0
+set height 0
+set pagination off
+
+set disassembly-flavor intel
+
+define hook-next
+  refresh
+end
+
+tui new-layout hyper {-horizontal src 2 asm 2 regs 1} 2 status 0 cmd 1
+set tui compact-source on
+
+define flags
+# OF (overflow) flag
+    if (($eflags >> 0xB) & 1)
+        printf "O "
+        set $_of_flag = 1
+    else
+        printf "o "
+        set $_of_flag = 0
+    end
+    if (($eflags >> 0xA) & 1)
+        printf "D "
+    else
+        printf "d "
+    end
+    if (($eflags >> 9) & 1)
+        printf "I "
+    else
+        printf "i "
+    end
+    if (($eflags >> 8) & 1)
+        printf "T "
+    else
+        printf "t "
+    end
+# SF (sign) flag
+    if (($eflags >> 7) & 1)
+        printf "S "
+        set $_sf_flag = 1
+    else
+        printf "s "
+        set $_sf_flag = 0
+    end
+# ZF (zero) flag
+    if (($eflags >> 6) & 1)
+        printf "Z "
+	set $_zf_flag = 1
+    else
+        printf "z "
+	set $_zf_flag = 0
+    end
+    if (($eflags >> 4) & 1)
+        printf "A "
+    else
+        printf "a "
+    end
+# PF (parity) flag
+    if (($eflags >> 2) & 1)
+        printf "P "
+	set $_pf_flag = 1
+    else
+        printf "p "
+	set $_pf_flag = 0
+    end
+# CF (carry) flag
+    if ($eflags & 1)
+        printf "C "
+	set $_cf_flag = 1
+    else
+        printf "c "
+	set $_cf_flag = 0
+    end
+    printf "\n"
+end
+document flags
+Print flags register.
+end
+
+
+define eflags
+    printf "     OF <%d>  DF <%d>  IF <%d>  TF <%d>",\
+           (($eflags >> 0xB) & 1), (($eflags >> 0xA) & 1), \
+           (($eflags >> 9) & 1), (($eflags >> 8) & 1)
+    printf "  SF <%d>  ZF <%d>  AF <%d>  PF <%d>  CF <%d>\n",\
+           (($eflags >> 7) & 1), (($eflags >> 6) & 1),\
+           (($eflags >> 4) & 1), (($eflags >> 2) & 1), ($eflags & 1)
+    printf "     ID <%d>  VIP <%d> VIF <%d> AC <%d>",\
+           (($eflags >> 0x15) & 1), (($eflags >> 0x14) & 1), \
+           (($eflags >> 0x13) & 1), (($eflags >> 0x12) & 1)
+    printf "  VM <%d>  RF <%d>  NT <%d>  IOPL <%d>\n",\
+           (($eflags >> 0x11) & 1), (($eflags >> 0x10) & 1),\
+           (($eflags >> 0xE) & 1), (($eflags >> 0xC) & 3)
+end
+document eflags
+Print eflags register.
+end
