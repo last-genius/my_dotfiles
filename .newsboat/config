@@ -1,0 +1,40 @@
+auto-reload yes
+reload-threads 100
+browser firefox
+
+datetime-format "%d %b '%y"
+
+# unbind keys
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+
+# bind keys - vim style
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+
+# An attempt at a Gruvbox-redux like theme (copied from my
+# cmus setup)
+# Inspired by the vim theme https://github.com/morhetz/gruvbox
+# Tested with the Kitty gruvbox terminal colour scheme
+# https://github.com/wdomitrz/kitty-gruvbox-theme
+
+color background           color223   color235
+color listnormal           color223   color235
+color listnormal_unread    color107   color235   
+color listfocus            color235   color203   bold
+color listfocus_unread     color235   color203   bold
+color info                 color235   color108
+color hint-key             color235   color108   bold
+color article              color223   color0     bold
+
+# highlights
+highlight article "^(Feed|Link):.*$" color11 default bold
+highlight article "^(Title|Date|Author):.*$" color11 default bold
+highlight article "https?://[^ ]+" color2 default underline
+highlight article "\\[[0-9]+\\]" color2 default bold
+highlight article "\\[image\\ [0-9]+\\]" color2 default bold
+highlight feedlist "^─.*$" color6 color6 bold
