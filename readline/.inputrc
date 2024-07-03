@@ -1,0 +1,12 @@
+$include /etc/Inputrc
+
+Control-o: "\C-e > output"
+
+# wraps the command with $()
+Control-j: "\C-a$(\C-e)"
+
+Control-b: "\C-e | wc -l"
+# changes 'grep text' to 'unbuffer grep text | tee >(wc -l)
+# this preserves colors and outputs the number of lines
+# alongside the whole output
+"\C-b\C-t": "\C-aunbuffer \C-e | tee >(wc -l)"
